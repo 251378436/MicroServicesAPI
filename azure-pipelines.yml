@@ -26,7 +26,7 @@ steps:
     command: 'test'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/'
 
-- script: dotnet reportgenerator "-reports:$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml" "-targetDir:$(Build.SourcesDirectory)/TestResults/Coverage/Reports" -tag:$(Build.BuildNumber) -reportTypes:htmlInline
+- script: dotnet reportgenerator
   workingDirectory: $(Build.SourcesDirectory)/API1.Test
   displayName: 'dotnet reportgenerator'
 
