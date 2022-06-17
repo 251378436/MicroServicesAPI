@@ -30,4 +30,9 @@ steps:
   workingDirectory: $(Build.SourcesDirectory)/API1.Test
   displayName: 'dotnet reportgenerator'
 
-
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/API1.Test/TestResults/Coverage/**/coverage.cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/API1.Test/TestResults/Coverage/Reports'
+    failIfCoverageEmpty: true
