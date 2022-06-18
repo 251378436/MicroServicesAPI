@@ -1,4 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /app
+
+# Copy everything
+COPY ./API1 ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-COPY ./API1/bin/Release/net6.0/publish/ App/
-WORKDIR /App
+WORKDIR /app
+COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "API1.dll"]
