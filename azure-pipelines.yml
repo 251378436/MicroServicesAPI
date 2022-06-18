@@ -32,15 +32,6 @@ steps:
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Publish the project - $(buildConfiguration)'
-  inputs:
-    command: 'publish'
-    projects: '**/*.csproj'
-    publishWebProjects: true
-    arguments: '--no-build --configuration $(buildConfiguration)'
-    zipAfterPublish: true
-
 - script: dotnet publish --no-build -c '$(buildConfiguration)'
   workingDirectory: $(Build.SourcesDirectory)
   displayName: 'dotnet publish $(buildConfiguration)'
