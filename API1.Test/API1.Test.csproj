@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\API1\API1.csproj" />
-    <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.2.15" />
   </ItemGroup>
 
 </Project>
