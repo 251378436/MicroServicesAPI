@@ -41,6 +41,10 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration)'
     zipAfterPublish: true
 
+- script: dotnet publish --no-build -c '$(buildConfiguration)'
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'dotnet publish $(buildConfiguration)'
+
 - task: DockerCompose@0
   displayName: 'docker compose build'
   inputs:
