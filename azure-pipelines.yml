@@ -32,7 +32,7 @@ steps:
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
-- script: dotnet publish --no-build -c '$(buildConfiguration)'
+- script: dotnet publish --no-build -c $(buildConfiguration)
   workingDirectory: $(Build.SourcesDirectory)
   displayName: 'dotnet publish $(buildConfiguration)'
 
