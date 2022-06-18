@@ -33,6 +33,22 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Unit Tests'
+  inputs:
+    command: 'test'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/'
+
+- script: dotnet reportgenerator "-reports:$(Build.SourcesDirectory)/**/TestResults/Coverage/coverage.cobertura.xml" "-targetDir:$(Build.SourcesDirectory)/CodeCoverage" -reportTypes:Cobertura
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'dotnet reportgenerator'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/*cobertura.xml'
+    failIfCoverageEmpty: false
+
+- task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'
   inputs:
     command: 'publish'
