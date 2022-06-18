@@ -26,16 +26,12 @@ steps:
     command: 'test'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish coverage API1 test'
+- task: reportgenerator@4
   inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/API1.Test/TestResults/Coverage/coverage.cobertura.xml'
-    failIfCoverageEmpty: false
+    reports: **/coverage.cobertura.xml;artifact/**/cobertura-coverage.xml
+    targetdir: $(Pipeline.Workspace)/coveragereport
 
 - task: PublishCodeCoverageResults@1
-  displayName: 'Publish coverage API2 test'
   inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/API2.Test/TestResults/Coverage/coverage.cobertura.xml'
-    failIfCoverageEmpty: false
+    codeCoverageTool: "Cobertura"
+    summaryFileLocation: $(Pipeline.Workspace)/coveragereport/Cobertura.xml
