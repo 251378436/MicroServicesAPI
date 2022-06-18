@@ -30,5 +30,5 @@ steps:
   displayName: 'PublishCodeCoverageResults API1 test'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/API1.Test/TestResults/Coverage/coverage.cobertura.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/TestResults/Coverage/coverage.cobertura.xml'
     failIfCoverageEmpty: false
