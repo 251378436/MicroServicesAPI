@@ -23,6 +23,11 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'custom'
+    custom: 'tool restore'
+
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'test'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/'
 
