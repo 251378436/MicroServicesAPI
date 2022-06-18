@@ -21,10 +21,9 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'custom'
-    custom: 'tool restore'
+- script: dotnet tool restore
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'dotnet tool restore'
 
 - task: DotNetCoreCLI@2
   inputs:
