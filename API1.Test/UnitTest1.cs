@@ -24,7 +24,7 @@ namespace API1.Test
 
             var result = controller.Get();
             Assert.NotNull(result);
-            Assert.NotEqual(5, result.Count());
+            Assert.Equal(5, result.Count());
 
         }
     }
