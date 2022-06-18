@@ -37,7 +37,7 @@ steps:
   inputs:
     command: 'publish'
     projects: '**/*.csproj'
-    publishWebProjects: false
+    publishWebProjects: true
     arguments: '--no-build --configuration $(buildConfiguration)'
     zipAfterPublish: true
 
