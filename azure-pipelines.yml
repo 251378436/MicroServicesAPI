@@ -54,5 +54,24 @@ steps:
     command: 'publish'
     projects: '**/*.csproj'
     publishWebProjects: false
-    arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+    arguments: '--no-build --configuration $(buildConfiguration)'
     zipAfterPublish: true
+
+- task: DockerCompose@0
+  displayName: 'docker compose build'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'DockerhubConnection'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'build'
+
+- task: DockerCompose@0
+  displayName: 'docker compose push'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'DockerhubConnection'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'push'
+
