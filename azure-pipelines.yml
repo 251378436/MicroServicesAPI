@@ -16,14 +16,21 @@ variables:
 
 steps:
   - task: DotNetCoreCLI@2
-    displayName: ".NET Build"
+    displayName: ".NET Build $(buildConfiguration)"
     inputs:
       command: "build"
+      arguments: "-c $(buildConfiguration)"
 
   - task: DotNetCoreCLI@2
     displayName: ".NET Tests"
     inputs:
       command: "test"
+  
+  - task: DotNetCoreCLI@2
+    displayName: ".NET Publish $(buildConfiguration)"
+    inputs:
+      command: "publish"
+      arguments: "--no-build -c $(buildConfiguration)"
 
   - task: DockerCompose@0
     displayName: 'docker compose build'
