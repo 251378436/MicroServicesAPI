@@ -25,12 +25,10 @@ steps:
     displayName: ".NET Tests"
     inputs:
       command: "test"
-  
-  - task: DotNetCoreCLI@2
-    displayName: ".NET Publish $(buildConfiguration)"
-    inputs:
-      command: "publish"
-      arguments: "--no-build -c $(buildConfiguration)"
+
+  - script: dotnet publish --no-build -c $(buildConfiguration)
+    workingDirectory: $(Build.SourcesDirectory)
+    displayName: '.NET Publish $(buildConfiguration)'
 
   - task: DockerCompose@0
     displayName: 'docker compose build'
