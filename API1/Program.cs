@@ -1,3 +1,4 @@
+using API1.Constraints;
 using API1.Converters;
 using API1.Filters;
 using Microsoft.AspNetCore.Http.Json;
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddRouting(options =>
+    options.ConstraintMap.Add("testId", typeof(TestIdConstraint)));
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

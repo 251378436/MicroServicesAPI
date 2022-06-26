@@ -17,7 +17,7 @@ namespace API1.Models
         [MinLength(3)]
         public string? RequestId { get; set; }
 
-        [Required]
+        //[Required]
         [DataType(DataType.Date)]
         //[DataType("yyyy-MM-dd")]
         //[SwaggerDefaultValue("bbbbbbbbbbbbb")]

@@ -58,5 +58,12 @@ namespace API1.Controllers
             result.BirthDay = DateTime.Now;
             return Ok(requestModel);
         }
+
+        [HttpGet("test/{testid:int:testId(123455)}/ids", Name = "TesPost")]
+        public async Task<IActionResult> PostTest(int testid)
+        {
+            await Task.Delay(1);
+            return Ok(1000);
+        }
     }
 }
