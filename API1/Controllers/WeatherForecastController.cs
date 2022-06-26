@@ -56,7 +56,7 @@ namespace API1.Controllers
             var result = new ResponseModel();
             result.RequestId = "12345asbcd";
             result.BirthDay = DateTime.Now;
-            return Ok(result);
+            return Ok(requestModel);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace API1.Models
         public string? RequestId { get; set; }
 
         [Required]
-        //[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         //[DataType("yyyy-MM-dd")]
         //[SwaggerDefaultValue("bbbbbbbbbbbbb")]
         //[CustomAdmissionDate]
