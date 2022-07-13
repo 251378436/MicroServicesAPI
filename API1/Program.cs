@@ -1,3 +1,4 @@
+using API1;
 using API1.Constraints;
 using API1.Converters;
 using API1.Filters;
@@ -35,6 +36,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SchemaFilter<ExampleSchemaFilter>();
 });
+
+builder.Services.AddHostedService<TimedHostedService>();
 
 var app = builder.Build();
 
