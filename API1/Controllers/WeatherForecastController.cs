@@ -2,6 +2,7 @@ using Base;
 using Microsoft.AspNetCore.Mvc;
 using API1.Models;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace API1.Controllers
 {
@@ -31,6 +32,9 @@ namespace API1.Controllers
         [ProducesResponseType(typeof(ResponseModel), 200)]
         public async Task<IActionResult> Get([FromBody]RequestModel requestModel)
         {
+            //throw new Exception("3333333333333333");
+            _logger.LogInformation("Information ***********");
+            _logger.LogCritical("Critical @###############SSSSSSSSSSS");
             var ttt1 = requestModel.BirthDay.GetValueOrDefault().ToString("yyyy-MM-dd");
             var t1 = "2022-06-24T06:51:31.4294718-12:00";
             var r1 = DateTime.Parse(t1);
@@ -59,10 +63,16 @@ namespace API1.Controllers
             return Ok(requestModel);
         }
 
-        [HttpGet("test/{testid:int:testId(123455)}/ids", Name = "TesPost")]
-        public async Task<IActionResult> PostTest(int testid)
+        [HttpGet("test/{testid:int}/ids", Name = "TesPost")]
+        public async Task<IActionResult> PostTest(int testid, CancellationToken cancellationToken)
         {
-            await Task.Delay(1);
+            await Task.Delay(10000);
+            if (cancellationToken.IsCancellationRequested)
+            {
+                Debug.WriteLine("***********************");
+                
+                throw new TaskCanceledException("eeeeeeee");
+            }
             return Ok(1000);
         }
     }

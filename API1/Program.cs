@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddRouting(options =>
     options.ConstraintMap.Add("testId", typeof(TestIdConstraint)));
 
@@ -47,6 +49,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapHealthChecks("/healthz");
 app.MapControllers();
 
 app.Run();
