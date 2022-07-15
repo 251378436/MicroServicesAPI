@@ -21,7 +21,13 @@ namespace API1
             while (!stoppingToken.IsCancellationRequested &&
             await timer.WaitForNextTickAsync(stoppingToken))
             {
-                await DoWorkAsync(stoppingToken);
+                try
+                {
+                    await DoWorkAsync(stoppingToken);
+                } catch (Exception ex)
+                {
+                    _logger.LogInformation("exception111111",ex);
+                }
             }
         }
 
