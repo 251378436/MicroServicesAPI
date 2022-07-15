@@ -1,46 +1,52 @@
-﻿namespace API1
-{
-    public class TimedHostedService : IHostedService, IDisposable
-    {
-        private int executionCount = 0;
-        private readonly ILogger<TimedHostedService> _logger;
-        private Timer? _timer = null;
+﻿using API1.Services;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger)
+namespace API1
+{
+    public class TimedHostedService : BackgroundService
+    {
+        private readonly ILogger<TimedHostedService> _logger;
+        private readonly IServiceProvider _serviceProvider;
+
+        public TimedHostedService(ILogger<TimedHostedService> logger, IServiceProvider serviceProvider)
         {
             _logger = logger;
+            _serviceProvider = serviceProvider;
         }
 
-        public Task StartAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Timed Hosted Service running.");
-
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(5));
-
-            return Task.CompletedTask;
-        }
-
-        private void DoWork(object? state)
-        {
-            var count = Interlocked.Increment(ref executionCount);
-
             _logger.LogInformation(
-                "Timed Hosted Service is working. Count: {Count}", count);
+                $"{nameof(TimedHostedService)} is running.");
+            using PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
+            while (!stoppingToken.IsCancellationRequested &&
+            await timer.WaitForNextTickAsync(stoppingToken))
+            {
+                await DoWorkAsync(stoppingToken);
+            }
         }
 
-        public Task StopAsync(CancellationToken stoppingToken)
+        private async Task DoWorkAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Timed Hosted Service is stopping.");
+            //_logger.LogInformation($"************* Thread ID:{Thread.CurrentThread.ManagedThreadId} *****************");
+            //_logger.LogInformation(
+            //    "Timed Hosted Service is working. Count: {Count}", count);
+            using (IServiceScope scope = _serviceProvider.CreateScope())
+            {
+                ICalculator calculator =
+                    scope.ServiceProvider.GetRequiredService<ICalculator>();
 
-            _timer?.Change(Timeout.Infinite, 0);
-
-            return Task.CompletedTask;
+                await calculator.IncreaseValue();
+                var sss = await calculator.GetValue();
+                _logger.LogInformation($"********** The value is: {sss}. *******");
+            }
         }
 
-        public void Dispose()
+        public override async Task StopAsync(CancellationToken stoppingToken)
         {
-            _timer?.Dispose();
+            _logger.LogInformation(
+                $"{nameof(TimedHostedService)} is stopping.");
+
+            await base.StopAsync(stoppingToken);
         }
     }
 }

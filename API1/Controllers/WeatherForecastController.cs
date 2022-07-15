@@ -33,6 +33,7 @@ namespace API1.Controllers
         public async Task<IActionResult> Get([FromBody]RequestModel requestModel)
         {
             //throw new Exception("3333333333333333");
+            _logger.LogInformation($"************* Thread ID:{Thread.CurrentThread.ManagedThreadId} *****************");
             _logger.LogInformation("Information ***********");
             _logger.LogCritical("Critical @###############SSSSSSSSSSS");
             var ttt1 = requestModel.BirthDay.GetValueOrDefault().ToString("yyyy-MM-dd");

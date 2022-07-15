@@ -2,6 +2,7 @@ using API1;
 using API1.Constraints;
 using API1.Converters;
 using API1.Filters;
+using API1.Services;
 using Microsoft.AspNetCore.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ builder.Services.AddControllers()
 //    options.SerializerOptions.PropertyNamingPolicy = null;
 //    options.SerializerOptions.WriteIndented = true;
 //});
+
+builder.Services.AddScoped<ICalculator, Calculator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
