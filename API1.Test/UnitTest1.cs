@@ -1,4 +1,5 @@
 using API1.Controllers;
+using API1.Models;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System.Linq;
@@ -22,9 +23,8 @@ namespace API1.Test
             var mockLog = new Mock<ILogger<WeatherForecastController>>();
             WeatherForecastController controller = new WeatherForecastController(mockLog.Object);
 
-            var result = controller.Get();
+            var result = controller.Get(new RequestModel());
             Assert.NotNull(result);
-            Assert.Equal(5, result.Count());
 
         }
     }
