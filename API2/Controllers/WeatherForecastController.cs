@@ -1,3 +1,4 @@
+using Bolong.Common.Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API2.Controllers
@@ -21,6 +22,8 @@ namespace API2.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            Logger.Show();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
