@@ -56,7 +56,6 @@ namespace API1.Controllers
             })
             .ToArray();
 
-            var ss = default(DateTime);
             var json = JsonSerializer.Serialize(list);
             var result = new ResponseModel();
             result.RequestId = "12345asbcd";

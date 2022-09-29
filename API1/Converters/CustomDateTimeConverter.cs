@@ -35,20 +35,20 @@ namespace API1.Converters
 			writer.WriteStringValue(valueWithKind);
 		}
 
-		public override DateTime ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			//var result = reader.GetDateTimeNoValidation();
-			return DateTime.Now;
-		}
+		//public override DateTime ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		//{
+		//	//var result = reader.GetDateTimeNoValidation();
+		//	return DateTime.Now;
+		//}
 
 		//public override DateTime ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		//{
 		//	return reader.GetDateTimeNoValidation();
 		//}
 
-		public virtual void WriteAsPropertyName(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
-		{
-            //writer.WritePropertyName(value);
-        }
+		//public virtual void WriteAsPropertyName(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+		//{
+  //          //writer.WritePropertyName(value);
+  //      }
     }
 }
