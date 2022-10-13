@@ -16,3 +16,11 @@ services:
       dockerfile: ./API2/Dockerfile
     ports:
       - 8082:80
+  microserviceapi3:
+    container_name: microserviceapi3
+    image: bolongdockerhub/microserviceapi3
+    build:
+      context: ./
+      dockerfile: ./API3/Dockerfile
+    ports:
+      - 8083:80
