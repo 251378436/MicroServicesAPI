@@ -16,10 +16,12 @@ variables:
 
 steps:
   - task: DotNetCoreCLI@2
+    displayName: ".NET Restore"
     inputs:
       command: 'restore'
       feedsToUse: 'select'
       vstsFeed: '861a2759-fa24-49f6-95c4-cf8375ce0095/1f0cd505-fffa-4710-8d1f-9bdd8755e7b1'
+
   - task: DotNetCoreCLI@2
     displayName: ".NET Build $(buildConfiguration)"
     inputs:
