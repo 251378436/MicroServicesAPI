@@ -49,7 +49,7 @@ steps:
       summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
       failIfCoverageEmpty: false
 
-  - script: dotnet publish --no-build -c $(buildConfiguration)
+  - script: dotnet publish -c $(buildConfiguration)
     workingDirectory: $(Build.SourcesDirectory)
     displayName: '.NET Publish $(buildConfiguration)'
 
