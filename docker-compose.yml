@@ -2,7 +2,7 @@ version: '3.9'
 services:
   microserviceapi1:
     container_name: microserviceapi1
-    image: bolongdockerhub/microserviceapi1
+    image: bolongdockerhub/microserviceapi1:v1.0.0
     build:
       context: ./
       dockerfile: ./API1/Dockerfile
@@ -10,7 +10,7 @@ services:
       - 8081:80
   microserviceapi2:
     container_name: microserviceapi2
-    image: bolongdockerhub/microserviceapi2
+    image: bolongdockerhub/microserviceapi2:v1.0.0
     build:
       context: ./
       dockerfile: ./API2/Dockerfile
@@ -18,7 +18,7 @@ services:
       - 8082:80
   microserviceapi3:
     container_name: microserviceapi3
-    image: bolongdockerhub/microserviceapi3
+    image: bolongdockerhub/microserviceapi3:v1.0.0
     build:
       context: ./
       dockerfile: ./API3/Dockerfile
