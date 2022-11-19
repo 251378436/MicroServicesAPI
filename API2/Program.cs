@@ -1,4 +1,8 @@
+using API2.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<Api2Settings>(builder.Configuration.GetSection("api2Settings"));
 
 // Add services to the container.
 
