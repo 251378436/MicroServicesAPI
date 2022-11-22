@@ -1,10 +1,13 @@
 ﻿using API2.Configuration;
+using API2.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace API2.Controllers
 {
+    [ServiceFilter(typeof(CookieFilter))]
+    [ResponseCache(Duration = 60)]
     [Route("api/[controller]")]
     [ApiController]
     public class InformationController : ControllerBase
@@ -26,6 +29,12 @@ namespace API2.Controllers
         public IActionResult GetSettings()
         {
             return Ok(_api2Settings);
+        }
+
+        [HttpGet("utctime")]
+        public IActionResult GetCurrentUTCTime()
+        {
+            return Ok(DateTime.UtcNow);
         }
     }
 }
