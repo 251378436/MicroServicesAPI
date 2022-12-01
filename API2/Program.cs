@@ -1,3 +1,6 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.Extensions.NETCore.Setup;
 using API2.Configuration;
 using API2.Filters;
 
@@ -13,6 +16,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CookieFilter>();
+
+// Get the AWS profile information from configuration providers
+AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
+
+// Configure AWS service clients to use these credentials
+builder.Services.AddDefaultAWSOptions(awsOptions);
+
+builder.Services.AddAWSService<IAmazonDynamoDB>();
+builder.Services.AddScoped<IDynamoDBContext, DynamoDBContext>();
 
 var app = builder.Build();
 
