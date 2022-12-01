@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+ENV ASPNETCORE_URLS=https://+;http://+
+ENV ASPNETCORE_HTTPS_PORT=8001
+ENV api2Settings__value1=value1-dockerfile
+ENV api2Settings__value2=value2-dockerfile
+EXPOSE 443
+EXPOSE 8082
+EXPOSE 8001
+COPY ./API2/bin/Release/net6.0/publish/ App/
+WORKDIR /App
+ENTRYPOINT ["dotnet", "API2.dll"]
