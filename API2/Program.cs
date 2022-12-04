@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.Extensions.NETCore.Setup;
+using Amazon.Runtime;
 using API2.Configuration;
 using API2.Filters;
 
@@ -17,13 +18,27 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CookieFilter>();
 
-// Get the AWS profile information from configuration providers
-AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
+//// Get the AWS profile information from configuration providers
+//AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
 
-// Configure AWS service clients to use these credentials
-builder.Services.AddDefaultAWSOptions(awsOptions);
+//// Configure AWS service clients to use these credentials
+//builder.Services.AddDefaultAWSOptions(awsOptions);
 
-builder.Services.AddAWSService<IAmazonDynamoDB>();
+//builder.Services.AddAWSService<IAmazonDynamoDB>();
+
+builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
+{
+    var clientConfig = new AmazonDynamoDBConfig
+    {
+        ServiceURL = "https://dynamodb.ap-northeast-1.amazonaws.com"
+    };
+
+    var awsCredentials = new BasicAWSCredentials("AKIAVZPMOTO2LG7DIG7K", "JAKR6m4az3cAcmq6iMKpfZGh2ni3jTVpNCohUWmo");
+
+    AmazonDynamoDBClient client = new AmazonDynamoDBClient(awsCredentials, clientConfig);
+
+    return client;
+});
 builder.Services.AddScoped<IDynamoDBContext, DynamoDBContext>();
 
 var app = builder.Build();
