@@ -26,6 +26,8 @@ builder.Services.AddScoped<CookieFilter>();
 
 //builder.Services.AddAWSService<IAmazonDynamoDB>();
 
+// add comments for test
+
 builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
 {
     var clientConfig = new AmazonDynamoDBConfig
